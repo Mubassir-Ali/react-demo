@@ -26,16 +26,18 @@ jobs:
         uses: actions/setup-node@v2-beta
         with:
           node-version: 12     
-      # Runs a single command using the runners shell
-      - name: install yarn 
-        uses: Borales/actions-yarn@v2.3.0
-        with:
-    # Yarn command
-         cmd: install #yarn install npm install 
+     
+     
+     # INSTALL YARN   
+      - uses: borales/actions-yarn@v2.3.0
+        with:         
+          cmd: install 
+
       - name: build yarn
         run: yarn build
        
       - name: setup surge
         run: npm install -global surge
+        
       - name: Execute Deployment with surge
-        run: surge ./ projectreactdemo06012021.surge.sh --token ${{secrets.SURGETOKEN}}
+        run: surge ./build projectreactdemo06012021.surge.sh --token ${{secrets.SURGETOKEN}}
